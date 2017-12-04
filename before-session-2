@@ -1,0 +1,80 @@
+#Linked Lists: Palindrome List ************************************
+class Solution:
+    # @param A : head node of linked list
+    # @return an integer
+    def lPalin(self, A):
+        values = []
+        
+        while A != None:
+            values.append(A.val)
+            A = A.next
+            
+        for i in xrange(len(values)/2):
+            if values[i] != values[len(values)-1-i]:
+                return 0
+                
+        return 1
+
+#Linked Lists: Insertion Sort List ************************************
+class Solution:
+    # @param A : head node of linked list
+    # @return the head node in the linked list
+    def insertionSortList(self, A):
+        a = []
+        head = A
+        
+        while(head != None):
+            a.append(head.val)
+            head = head.next
+        
+        head = A
+        a.sort()
+        
+        for num in a:
+            A.val = num
+            A = A.next
+            
+        return head
+
+#Hashing: Colorful Number ************************************
+class Solution:
+    # @param A : integer
+    # @return an integer
+    def colorful(self, A):
+        listA = list(str(A))
+        productOfSubSequences = dict()
+        
+        for i in xrange(len(listA)):
+            for j in xrange(i, len(listA)):
+                subSequnce = listA[i:j+1]
+                product = 1
+                for n in subSequnce:
+                    product *= int(n)
+                    
+                if product in productOfSubSequences:
+                    return 0
+                else:
+                    productOfSubSequences[product] = 1
+
+        return 1
+    
+#Hashing: Anagrams ************************************
+class Solution:
+    # @param A : tuple of strings
+    # @return a list of list of integers
+    def anagrams(self, A):
+        sortedStringOfA = map(sorted, A)
+        anagramsIndeces = dict()
+        result = []
+        
+        for i in xrange(len(sortedStringOfA)):
+            e = tuple(sortedStringOfA[i])
+            if e in anagramsIndeces.keys():
+                anagramsIndeces[e].append(i+1)
+            else:
+                anagramsIndeces[e] = [str(i+1)]
+                
+        for key, value in anagramsIndeces.iteritems():
+            result. append(value)
+                    
+        return result
